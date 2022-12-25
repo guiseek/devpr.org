@@ -10,7 +10,7 @@ export class AuthRequestDto implements Pick<User, 'username' | 'password'> {
   username: string
 
   @IsString()
-  @MinLength(8)
+  @MinLength(6)
   @ApiProperty({
     nullable: false,
   })

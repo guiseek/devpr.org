@@ -1,0 +1,6 @@
+export * from './lib/interfaces/user.interface'
+export * from './lib/interfaces/auth-request.interface'
+export * from './lib/interfaces/auth-response.interface'
+export * from './lib/interfaces/create-user.interface'
+export * from './lib/interfaces/check-user.interface'
+export * from './lib/enums/role.enum'

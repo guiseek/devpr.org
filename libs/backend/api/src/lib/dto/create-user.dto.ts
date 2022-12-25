@@ -9,7 +9,7 @@ export class CreateUserDto {
   username: string
 
   @IsString()
-  @MinLength(8)
+  @MinLength(6)
   @ApiProperty({
     nullable: false,
   })

@@ -19,9 +19,10 @@
       "@devpr.org/backend/auth": ["libs/backend/auth/src/index.ts"],
       "@devpr.org/backend/user": ["libs/backend/user/src/index.ts"],
       "@devpr.org/backend/util": ["libs/backend/util/src/index.ts"],
-      "@devpr.org/frontend/auth/shell": [
-        "libs/frontend/auth/shell/src/index.ts"
-      ]
+      "@devpr.org/common/api": ["libs/common/api/src/index.ts"],
+      "@devpr.org/common/util": ["libs/common/util/src/index.ts"],
+      "@devpr.org/frontend/api": ["libs/frontend/api/src/index.ts"],
+      "@devpr.org/frontend/auth": ["libs/frontend/auth/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
