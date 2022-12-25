@@ -1,30 +1,31 @@
 import {
-  Controller,
   Post,
   Get,
   Body,
   Request,
   Options,
   UseGuards,
+  Controller,
   ConflictException,
-} from '@nestjs/common';
-import { AuthRequest } from './interfaces/auth-request.interface';
-import { LocalAuthGuard } from './guards/local-auth.guard';
-import { BackendAuthService } from './backend-auth.service';
-import { JwtAuthGuard } from './guards/jwt-auth.guard';
-import { Public } from './decorators/public.decorator';
-import { CheckUserDto } from './dto/check-user.dto';
-import { CreateUserDto } from '@devpr.org/backend/user';
+} from '@nestjs/common'
 import {
+  ApiTags,
+  ApiBody,
   ApiBasicAuth,
   ApiBearerAuth,
-  ApiConflictResponse,
   ApiOperation,
   ApiResponse,
-  ApiTags,
-} from '@nestjs/swagger';
-import { UserResponseDto } from './dto/user-response.dto';
-import { AuthResponseDto } from './dto/auth-response.dto';
+} from '@nestjs/swagger'
+import {CreateUserDto} from '@devpr.org/backend/api'
+import {AuthRequest} from './interfaces/auth-request.interface'
+import {BackendAuthService} from './backend-auth.service'
+import {JwtAuthGuard} from './guards/jwt-auth.guard'
+import {LocalAuthGuard} from './guards/local-auth.guard'
+import {UserResponseDto} from './dto/user-response.dto'
+import {AuthResponseDto} from './dto/auth-response.dto'
+import {AuthRequestDto} from './dto/auth-request.dto'
+import {CheckUserDto} from './dto/check-user.dto'
+import {Public} from './decorators/public.decorator'
 
 @ApiBearerAuth()
 @ApiTags('auth')
@@ -32,59 +33,56 @@ import { AuthResponseDto } from './dto/auth-response.dto';
 export class BackendAuthController {
   constructor(private readonly backendAuthService: BackendAuthService) {}
 
-  /**
-   * Now we must provide a mechanism
-   * for declaring routes as public.
-   */
   @Public()
   @Post('login')
   @UseGuards(LocalAuthGuard)
-  @ApiOperation({ summary: 'Sign in' })
-  @ApiResponse({ status: 401, description: 'Unauthorized.' })
+  @ApiBasicAuth()
+  @ApiOperation({summary: 'Sign in'})
+  @ApiResponse({status: 401, description: 'Unauthorized.'})
   @ApiResponse({
     status: 200,
     description: 'The access token',
     type: AuthResponseDto,
   })
-  @ApiBasicAuth()
+  @ApiBody({type: AuthRequestDto})
   signIn(@Request() req: AuthRequest) {
-    return this.backendAuthService.login(req.user);
+    return this.backendAuthService.login(req.user)
   }
 
   @Public()
-  @ApiOperation({ summary: 'Check user availability' })
   @Options('check')
-  async checkUsername(@Body() { username }: CheckUserDto) {
-    const user = await this.backendAuthService.checkUser({ username });
+  @ApiOperation({summary: 'Check user availability'})
+  async checkUsername(@Body() {username}: CheckUserDto) {
+    const user = await this.backendAuthService.checkUser({username})
     if (user) {
-      throw new ConflictException('Username already exists');
+      throw new ConflictException('Username already exists')
     }
-    return;
+    return
   }
 
   @Public()
   @Post('register')
-  @ApiOperation({ summary: 'Sign up' })
-  @ApiResponse({ status: 401, description: 'Unauthorized.' })
+  @ApiOperation({summary: 'Sign up'})
+  @ApiResponse({status: 401, description: 'Unauthorized.'})
   @ApiResponse({
     status: 200,
     description: 'The auth user record',
     type: UserResponseDto,
   })
   async register(@Body() user: CreateUserDto) {
-    return this.backendAuthService.createUser(user);
+    return this.backendAuthService.createUser(user)
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get('profile')
-  @ApiOperation({ summary: 'Authenticated user' })
-  @ApiResponse({ status: 401, description: 'Unauthorized.' })
+  @UseGuards(JwtAuthGuard)
+  @ApiOperation({summary: 'Authenticated user'})
+  @ApiResponse({status: 401, description: 'Unauthorized.'})
   @ApiResponse({
     status: 200,
     description: 'The auth user record',
     type: UserResponseDto,
   })
   getProfile(@Request() req: AuthRequest) {
-    return req.user;
+    return req.user
   }
 }

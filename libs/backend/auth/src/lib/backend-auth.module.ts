@@ -1,32 +1,27 @@
-import { Module } from '@nestjs/common';
-import { PassportModule } from '@nestjs/passport';
-import { LocalStrategy } from './strategies/local.strategy';
-import { UserRepository } from './repositories/user.repository';
-import { BackendAuthController } from './backend-auth.controller';
-import { BackendAuthService } from './backend-auth.service';
+import {Module} from '@nestjs/common'
+import {PassportModule} from '@nestjs/passport'
+import {LocalStrategy} from './strategies/local.strategy'
+import {BackendAuthController} from './backend-auth.controller'
+import {BackendAuthService} from './backend-auth.service'
 
-import { JwtModule } from '@nestjs/jwt';
-import { APP_GUARD } from '@nestjs/core';
-import { jwtConstants } from './config/constants';
-import { JwtAuthGuard } from './guards/jwt-auth.guard';
-import { JwtStrategy } from './strategies/jwt.strategy';
-import { BackendUserModule } from '@devpr.org/backend/user';
+import {JwtModule} from '@nestjs/jwt'
+import {APP_GUARD} from '@nestjs/core'
+import {jwtConstants} from './config/constants'
+import {JwtAuthGuard} from './guards/jwt-auth.guard'
+import {JwtStrategy} from './strategies/jwt.strategy'
 
 @Module({
   imports: [
     PassportModule,
-    BackendUserModule,
     JwtModule.register({
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '60s' },
+      signOptions: {expiresIn: '3600s'},
     }),
   ],
   controllers: [BackendAuthController],
   providers: [
-    UserRepository,
     BackendAuthService,
     LocalStrategy,
-
     JwtStrategy,
     /**
      * If the vast majority of your endpoints should be

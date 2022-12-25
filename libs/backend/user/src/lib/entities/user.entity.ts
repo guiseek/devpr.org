@@ -1,76 +1,76 @@
-import { entityContainer } from '@devpr.org/backend/util';
+import {entityContainer} from '@devpr.org/backend/util'
+import {Role} from '@devpr.org/backend/api'
 import {
-  BaseEntity,
   Column,
   Entity,
-  PrimaryGeneratedColumn,
   Unique,
-} from 'typeorm';
-import { ROLES } from '../enums/roles.enum';
+  BaseEntity,
+  PrimaryGeneratedColumn,
+} from 'typeorm'
 
 @Entity()
 @Unique(['username'])
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: number
 
   @Column({
     type: 'varchar',
     nullable: false,
   })
-  username: string;
-
-  @Column({
-    type: 'varchar',
-    nullable: false,
-    default: '',
-  })
-  password: string;
-
-  @Column({
-    type: 'varchar',
-    nullable: false,
-  })
-  salt: string;
-
-  @Column({
-    type: 'varchar',
-    nullable: false,
-  })
-  email: string;
+  username: string
 
   @Column({
     type: 'varchar',
     nullable: false,
     default: '',
   })
-  name: string;
+  password: string
+
+  @Column({
+    type: 'varchar',
+    nullable: false,
+  })
+  salt: string
+
+  @Column({
+    type: 'varchar',
+    nullable: false,
+  })
+  email: string
+
+  @Column({
+    type: 'varchar',
+    nullable: false,
+    default: '',
+  })
+  name: string
 
   @Column({
     type: 'varchar',
     default: '',
   })
-  photoUrl: string;
+  photoUrl: string
 
   @Column({
     type: 'enum',
-    enum: ROLES,
-    default: ROLES.USER,
+    enum: Role,
+    default: Role.User,
   })
-  role: string;
+  role: Role
 
   @Column({
     type: 'boolean',
     default: true,
   })
-  status: boolean;
+  status: boolean
 
   @Column({
     type: 'timestamp',
     default: () => 'CURRENT_TIMESTAMP()',
     nullable: false,
   })
-  createdAt: Date;
+  createdAt: Date
 
   @Column({
     type: 'timestamp',
@@ -78,7 +78,7 @@ export class User extends BaseEntity {
     onUpdate: 'CURRENT_TIMESTAMP()',
     nullable: false,
   })
-  updatedAt: Date;
+  updatedAt: Date
 }
 
-entityContainer.add(User);
+entityContainer.add(User)

@@ -15,9 +15,13 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@devpr.org/backend/api": ["libs/backend/api/src/index.ts"],
       "@devpr.org/backend/auth": ["libs/backend/auth/src/index.ts"],
       "@devpr.org/backend/user": ["libs/backend/user/src/index.ts"],
-      "@devpr.org/backend/util": ["libs/backend/util/src/index.ts"]
+      "@devpr.org/backend/util": ["libs/backend/util/src/index.ts"],
+      "@devpr.org/frontend/auth/shell": [
+        "libs/frontend/auth/shell/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

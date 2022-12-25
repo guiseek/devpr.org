@@ -1,18 +1,24 @@
-import { Exclude } from 'class-transformer';
-import { User } from '../interfaces/user.interface';
+import {Exclude} from 'class-transformer'
+import {Role, User} from '@devpr.org/backend/api'
 
 export class UserResponseDto implements User {
-  id: number;
-  username: string;
+  id: number
+  username: string
+  email: string
+  name: string
+  photoUrl: string
+  role: Role
+  status: boolean
+  createdAt: Date
+  updatedAt: Date
 
   @Exclude()
-  password: string;
+  password: string
 
   @Exclude()
-  salt: string;
+  salt: string
 
-  constructor({ id, username }: Pick<UserResponseDto, 'id' | 'username'>) {
-    this.id = id;
-    this.username = username;
+  constructor(user: User) {
+    Object.assign(this, user)
   }
 }

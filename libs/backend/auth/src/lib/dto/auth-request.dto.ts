@@ -1,18 +1,18 @@
-import { User } from '../interfaces/user.interface';
-import { ApiProperty } from '@nestjs/swagger';
-import { IsString, MinLength } from 'class-validator';
+import {IsString, MinLength} from 'class-validator'
+import {ApiProperty} from '@nestjs/swagger'
+import {User} from '@devpr.org/backend/api'
 
-export class AuthRequestDto implements Omit<User, 'id' | 'salt'> {
+export class AuthRequestDto implements Pick<User, 'username' | 'password'> {
   @IsString()
   @ApiProperty({
-    nullable: false
+    nullable: false,
   })
-  username: string;
+  username: string
 
   @IsString()
   @MinLength(8)
   @ApiProperty({
-    nullable: false
+    nullable: false,
   })
-  password: string;
+  password: string
 }

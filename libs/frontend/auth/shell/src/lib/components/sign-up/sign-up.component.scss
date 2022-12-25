@@ -1,0 +1,14 @@
+:host {
+  display: block;
+  padding: 16px;
+  section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 1em;
+    grid-row-gap: 1em;
+  }
+  footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

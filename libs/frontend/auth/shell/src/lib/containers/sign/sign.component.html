@@ -1,0 +1,21 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>DevPR</mat-card-title>
+    <mat-card-subtitle>Sign</mat-card-subtitle>
+  </mat-card-header>
+
+  <section>
+    <mat-tab-group color="accent" dynamicHeight>
+      <mat-tab label="In">
+        <ng-template matTabContent>
+          <devpr-sign-in (signIn)="onSignIn($event)"></devpr-sign-in>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="Up">
+        <ng-template matTabContent>
+          <devpr-sign-up (signUp)="onSignUp($event)"></devpr-sign-up>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
+  </section>
+</mat-card>

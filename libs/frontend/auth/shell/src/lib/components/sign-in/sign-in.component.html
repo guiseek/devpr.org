@@ -1,0 +1,18 @@
+<form [formGroup]="form" (ngSubmit)="signIn.emit(form.value)">
+  <section>
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input type="text" matInput formControlName="username" />
+      <mat-error>Obrigatório</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Senha</mat-label>
+      <input type="password" matInput formControlName="password" />
+      <mat-error>Mínimo de 8 caracteres</mat-error>
+    </mat-form-field>
+  </section>
+
+  <footer>
+    <button mat-stroked-button>Enviar</button>
+  </footer>
+</form>
