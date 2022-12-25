@@ -4,16 +4,6 @@
   "sourceRoot": "libs/backend/util/src",
   "projectType": "library",
   "targets": {
-    "build": {
-      "executor": "@nrwl/js:tsc",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "outputPath": "dist/libs/backend/util",
-        "main": "libs/backend/util/src/index.ts",
-        "tsConfig": "libs/backend/util/tsconfig.lib.json",
-        "assets": ["libs/backend/util/*.md"]
-      }
-    },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],

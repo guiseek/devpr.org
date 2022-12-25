@@ -4,17 +4,6 @@
   "sourceRoot": "libs/backend/auth/src",
   "projectType": "library",
   "targets": {
-    "build": {
-      "executor": "@nrwl/js:tsc",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "outputPath": "dist/libs/backend/auth",
-        "tsConfig": "libs/backend/auth/tsconfig.lib.json",
-        "packageJson": "libs/backend/auth/package.json",
-        "main": "libs/backend/auth/src/index.ts",
-        "assets": ["libs/backend/auth/*.md"]
-      }
-    },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],

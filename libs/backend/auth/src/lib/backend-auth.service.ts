@@ -4,10 +4,9 @@ import { User } from './interfaces/user.interface';
 import { validatePassword } from './utilities/validate-password';
 import { createPassword } from './utilities/create-password';
 import { AuthRequestDto } from './dto/auth-request.dto';
-import { CreateUserDto } from './dto/create-user.dto';
 import { UserResponseDto } from './dto/user-response.dto';
 import { CheckUserDto } from './dto/check-user.dto';
-import { UserService } from '@devpr.org/backend/user';
+import { CreateUserDto, UserService } from '@devpr.org/backend/user';
 
 @Injectable()
 export class BackendAuthService {
@@ -18,8 +17,7 @@ export class BackendAuthService {
 
   async validateUser({ username, password }: AuthRequestDto) {
     const user = await this.userService.findOne(username);
-
-    if (user && validatePassword(password, user.password, user.salt)) {
+    if (user && validatePassword(password, user.password)) {
       return user;
     }
     return null;

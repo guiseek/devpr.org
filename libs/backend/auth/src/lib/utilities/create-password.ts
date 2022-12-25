@@ -1,8 +1,7 @@
-import { randomBytes } from 'crypto';
-import { encodePassword } from './encode-password';
+import { hashSync, genSaltSync } from 'bcrypt';
 
 export function createPassword(plain: string) {
-  const salt = randomBytes(16).toString('hex');
-  const pass = encodePassword(plain, salt);
-  return { salt, password: pass.toString('hex') };
+  const salt = genSaltSync(10);
+  const password = hashSync(plain, salt);
+  return { salt, password };
 }

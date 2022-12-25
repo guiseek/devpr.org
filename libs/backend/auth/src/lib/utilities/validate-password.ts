@@ -1,6 +1,5 @@
-import { encodePassword } from './encode-password';
+import { compareSync } from 'bcrypt';
 
-export function validatePassword(plain: string, hash: string, salt: string) {
-  const pass = encodePassword(plain, salt);
-  return pass.compare(Buffer.from(hash));
+export function validatePassword(plain: string, hash: string) {
+  return compareSync(plain, hash);
 }
