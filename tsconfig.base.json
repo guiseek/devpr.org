@@ -22,7 +22,8 @@
       "@devpr.org/common/api": ["libs/common/api/src/index.ts"],
       "@devpr.org/common/util": ["libs/common/util/src/index.ts"],
       "@devpr.org/frontend/api": ["libs/frontend/api/src/index.ts"],
-      "@devpr.org/frontend/auth": ["libs/frontend/auth/src/index.ts"]
+      "@devpr.org/frontend/auth": ["libs/frontend/auth/src/index.ts"],
+      "@devpr.org/frontend/user": ["libs/frontend/user/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

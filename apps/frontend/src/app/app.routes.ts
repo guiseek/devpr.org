@@ -3,8 +3,8 @@ import {Route} from '@angular/router'
 export const appRoutes: Route[] = [
   {
     path: '',
-    pathMatch: 'full',
-    redirectTo: 'auth'
+    loadChildren: () =>
+      import('@devpr.org/frontend/user').then((m) => m.FrontendUserModule),
   },
   {
     path: 'auth',

@@ -73,7 +73,7 @@ export class BackendAuthController {
     return this.backendAuthService.createUser(user)
   }
 
-  @Get('profile')
+  @Get('me')
   @UseGuards(JwtAuthGuard)
   @ApiOperation({summary: 'Authenticated user'})
   @ApiResponse({status: 401, description: 'Unauthorized.'})

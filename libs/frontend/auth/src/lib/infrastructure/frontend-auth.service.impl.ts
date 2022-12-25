@@ -2,6 +2,7 @@ import {HttpClient} from '@angular/common/http'
 import {
   User,
   CheckUser,
+  CheckAuth,
   CreateUser,
   AuthRequest,
   AuthResponse,
@@ -18,7 +19,12 @@ export class FrontendAuthServiceImpl implements FrontendAuthService {
   createUser(value: CreateUser) {
     return this.http.post<User>('/api/auth/register', value)
   }
+
   checkUser(value: CheckUser) {
     return this.http.post<User>('/api/auth/check', value)
+  }
+
+  checkAuth() {
+    return this.http.get<CheckAuth>('/api/auth/me')
   }
 }

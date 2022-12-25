@@ -1,10 +1,11 @@
 import {Component, inject, OnDestroy} from '@angular/core'
-import {Router} from '@angular/router'
+import {ActivatedRoute, Router} from '@angular/router'
 import {SubAsync} from '@devpr.org/common/util'
 import {
   CreateUser,
   AuthRequest,
   FrontendAuthService,
+  FrontendStorageService,
 } from '@devpr.org/frontend/api'
 
 @Component({
@@ -21,14 +22,19 @@ export class SignComponent implements OnDestroy {
   sub = new SubAsync()
 
   router = inject(Router)
+  route = inject(ActivatedRoute)
 
   service = inject(FrontendAuthService)
+
+  storage = inject(FrontendStorageService)
 
   onSignIn<T extends AuthRequest>(value: T) {
     const login$ = this.service.login(value)
 
     this.sub.async = login$.subscribe((response) => {
-      console.log(response)
+      this.storage.set('auth', response)
+      const {redirectTo = '/'} = this.route.snapshot.queryParams
+      this.router.navigateByUrl(redirectTo)
     })
   }
 
