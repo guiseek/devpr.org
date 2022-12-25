@@ -1,4 +1,9 @@
+import { SnakeNamingStrategy } from './strategies/snake-naming.strategy';
+import { environment } from '../environments/environment';
 import { DataSource } from 'typeorm';
+import { entityContainer } from '@devpr.org/backend/util';
+
+const entities = entityContainer.get()
 
 export const databaseProviders = [
   {
@@ -6,17 +11,10 @@ export const databaseProviders = [
     useFactory: async () => {
       const dataSource = new DataSource({
         type: 'mysql',
-        host: 'localhost',
-        port: 3306,
-        username: 'root',
-        password: 'root',
-        database: 'test',
-        entities: [
-            __dirname + '/../**/*.entity{.ts,.js}',
-        ],
-        synchronize: true,
+        namingStrategy: new SnakeNamingStrategy(),
+        ...environment.db,
+        entities,
       });
-
       return dataSource.initialize();
     },
   },

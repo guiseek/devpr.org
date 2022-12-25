@@ -10,11 +10,12 @@ import { APP_GUARD } from '@nestjs/core';
 import { jwtConstants } from './config/constants';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { JwtStrategy } from './strategies/jwt.strategy';
+import { BackendUserModule } from '@devpr.org/backend/user';
 
 @Module({
   imports: [
     PassportModule,
-
+    BackendUserModule,
     JwtModule.register({
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '60s' },

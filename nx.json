@@ -32,5 +32,6 @@
       "!{projectRoot}/.eslintrc.json"
     ],
     "sharedGlobals": []
-  }
+  },
+  "defaultProject": "backend"
 }

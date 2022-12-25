@@ -1,23 +1,23 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { User } from './interfaces/user.interface';
-import { UserRepository } from './repositories/user.repository';
 import { validatePassword } from './utilities/validate-password';
 import { createPassword } from './utilities/create-password';
 import { AuthRequestDto } from './dto/auth-request.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserResponseDto } from './dto/user-response.dto';
 import { CheckUserDto } from './dto/check-user.dto';
+import { UserService } from '@devpr.org/backend/user';
 
 @Injectable()
 export class BackendAuthService {
   constructor(
-    private userRepository: UserRepository,
+    private userService: UserService,
     private jwtService: JwtService
   ) {}
 
   async validateUser({ username, password }: AuthRequestDto) {
-    const user = await this.userRepository.findOne(username);
+    const user = await this.userService.findOne(username);
 
     if (user && validatePassword(password, user.password, user.salt)) {
       return user;
@@ -26,13 +26,13 @@ export class BackendAuthService {
   }
 
   async checkUser(user: CheckUserDto) {
-    return this.userRepository.findOne(user.username);
+    return this.userService.findOne(user.username);
   }
 
   async createUser(user: CreateUserDto) {
     const { password, salt } = createPassword(user.password);
     return new UserResponseDto(
-      await this.userRepository.createOne({
+      await this.userService.createOne({
         ...user,
         password,
         salt,
