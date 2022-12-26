@@ -11,10 +11,13 @@ export class SignUpComponent {
 
   @Output() signUp = new EventEmitter()
 
-  form = this.builder.group({
-    username: ['', [Validators.required]],
-    password: ['', [Validators.required, Validators.minLength(6)]],
-    email: ['', [Validators.required, Validators.email]],
-    name: ['', [Validators.required, Validators.maxLength(500)]],
-  })
+  form = this.builder.group(
+    {
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      email: ['', [Validators.required, Validators.email]],
+      name: ['', [Validators.required, Validators.maxLength(500)]],
+    },
+    {updateOn: 'blur'}
+  )
 }

@@ -2,8 +2,19 @@
   <section>
     <mat-form-field>
       <mat-label>Username</mat-label>
-      <input type="text" matInput formControlName="username" />
-      <mat-error>Obrigatório</mat-error>
+      <input
+        type="text"
+        matInput
+        devprCheckUser
+        #error="devprCheckUser"
+        formControlName="username"
+      />
+      <mat-error>
+        <ng-container *ngIf="error.message$ | async as message">
+          {{ message }}
+        </ng-container>
+      </mat-error>
+      <mat-error> </mat-error>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Senha</mat-label>
@@ -24,6 +35,6 @@
   </section>
 
   <footer>
-    <button mat-stroked-button>Enviar</button>
+    <button mat-raised-button>Enviar</button>
   </footer>
 </form>

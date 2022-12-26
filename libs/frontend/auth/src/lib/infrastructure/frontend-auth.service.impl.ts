@@ -7,6 +7,7 @@ import {
   AuthRequest,
   AuthResponse,
   FrontendAuthService,
+  CheckResponse,
 } from '@devpr.org/frontend/api'
 
 export class FrontendAuthServiceImpl implements FrontendAuthService {
@@ -21,7 +22,7 @@ export class FrontendAuthServiceImpl implements FrontendAuthService {
   }
 
   checkUser(value: CheckUser) {
-    return this.http.post<User>('/api/auth/check', value)
+    return this.http.post<CheckResponse>('/api/auth/check', value)
   }
 
   checkAuth() {

@@ -3,10 +3,10 @@ import {
   Get,
   Body,
   Request,
-  Options,
   UseGuards,
   Controller,
   ConflictException,
+  NotFoundException,
 } from '@nestjs/common'
 import {
   ApiTags,
@@ -50,14 +50,11 @@ export class BackendAuthController {
   }
 
   @Public()
-  @Options('check')
+  @Post('check')
   @ApiOperation({summary: 'Check user availability'})
   async checkUsername(@Body() {username}: CheckUserDto) {
     const user = await this.backendAuthService.checkUser({username})
-    if (user) {
-      throw new ConflictException('Username already exists')
-    }
-    return
+    return user ? {message: 'Username already exists'} : ''
   }
 
   @Public()
